@@ -1,0 +1,19 @@
+Part 2: Thread Creation
+2.2
+  There was a infinite loop of varying number of A, B, and C's 
+2.4
+  C is the only character printing. This could be caused by the main function entering an infinite loop
+
+Part 4: Spin Locks
+						System Time 	User Time 	Real Time
+pthread_mutext(count)				0m0.756s	0m1.303s	0m1.034s
+spin_lock (count_spin with thr_yield)		0m0.097s	0m0.432s	0m0.267is
+spin_lock (count_spin wihthout thr_yield)	0m0.004s	0m4.064s	0m2.072s
+
+1. There was less user time in count_spin with thr_yield since the yield puts the thread in a waiting state and gives up processing power to other processes
+2. There was less system time in count_spin with thr_yield because count is constantly locking and unlocking the mutext lock which is down in kernel mode
+
+Part 7: Buffer Overflow
+1. \xef\xbe\xad\xde
+2. ./buffer `printf "helloworldgoodb\xef\xbe\xad\xde"`
+3. The pairs of characters that make up the bytes that make up 0xdeadbeef have to be placed in reversed order. To fill up the buffer, "helloworldgoodb" was used for its 15 characters.
